@@ -166,7 +166,7 @@
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(121, 36);
             this.btnSiguiente.TabIndex = 14;
-            this.btnSiguiente.Text = "SIGUIENTE";
+            this.btnSiguiente.Text = "SIGUIENTE TURNO";
             this.btnSiguiente.UseVisualStyleBackColor = true;
             // 
             // Form1
