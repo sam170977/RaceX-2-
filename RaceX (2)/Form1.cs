@@ -12,7 +12,7 @@ namespace RaceX__2_
 {
     public partial class Form1 : Form
     {
-        private Carrera carrera = new Carrera();
+        private Carrera carrera;
 
         public Form1()
         {
@@ -41,6 +41,15 @@ namespace RaceX__2_
             }
 
             Auto nuevo = AutoFactory.CrearAuto(tipo, nombre);
+
+            ValidarParticipantes(carrera, nuevo);
+
+            if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe un auto con ese nombre.");
+                return;
+            }
+
             carrera.AgregarAuto(nuevo);
 
             dgvVehiculos.Rows.Add(nombre, tipo, "0");
@@ -54,6 +63,13 @@ namespace RaceX__2_
         private void btnIniciarCarrera_Click(object sender, EventArgs e)
         {
             string clima = cmbClima.SelectedItem?.ToString();
+
+            if (carrera.Autos.Count < 3)
+            {
+                MessageBox.Show("Agrega al menos tres autos antes de iniciar la carrera.");
+                return;
+            }
+
             if (string.IsNullOrEmpty(clima))
             {
                 MessageBox.Show("Selecciona el clima de la carrera.");
@@ -67,6 +83,7 @@ namespace RaceX__2_
             {
                 row.Cells[2].Value = "0";
             }
+
             MessageBox.Show("¡La carrera ha comenzado!");
         }
 
@@ -79,6 +96,7 @@ namespace RaceX__2_
             }
 
             string resultado = carrera.SiguienteTurno();
+
             for (int i = 0; i < carrera.Autos.Count; i++)
             {
                 dgvVehiculos.Rows[i].Cells[2].Value = carrera.Autos[i].DistanciaRecorrida.ToString();
@@ -91,8 +109,16 @@ namespace RaceX__2_
             {
                 lblGanador.Text = $"Ganador: {carrera.Ganador.Nombre}";
             }
+        }
 
+        private void ValidarParticipantes(Carrera carrera, Auto nuevo)
+        {
+            if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show("Ya existe un auto con ese nombre.");
+                return;
+            }
         }
     }
-    }
+}
 

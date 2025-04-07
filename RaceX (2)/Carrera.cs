@@ -23,14 +23,17 @@ namespace RaceX__2_
         public string SiguienteTurno()
         {
             string mensaje = "";
+
             foreach (var auto in Autos)
             {
-                if (CarreraTerminada) break;
+                if (CarreraTerminada)
+                    break;
 
                 int avance = auto.Avanzar(Clima);
 
                 // 30% de probabilidad de obstáculo
                 bool obstaculo = rnd.Next(1, 101) <= 30;
+
                 if (obstaculo)
                 {
                     avance -= 5;

@@ -15,13 +15,22 @@ namespace RaceX__2_
             switch (tipo)
             {
                 case "Deportivo":
-                    auto = new AutoDeportivo();
+                    auto = new AutoDeportivo()
+                    {
+                        Tipo = "Deportivo"
+                    };
                     break;
                 case "Todoterreno":
-                    auto = new AutoTodoterreno();
+                    auto = new AutoTodoterreno()
+                    {
+                        Tipo = "Todoterreno"
+                    };
                     break;
                 case "Híbrido":
-                    auto = new AutoHibrido();
+                    auto = new AutoHibrido()
+                    {
+                        Tipo = "Híbrido"
+                    };
                     break;
                 default:
                     throw new ArgumentException("Tipo de auto no válido");

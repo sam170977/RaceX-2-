@@ -8,8 +8,6 @@ namespace RaceX__2_
 {
     public class AutoDeportivo : Auto
     {
-        public AutoDeportivo() { Tipo = "Deportivo"; }
-
         public override int CalcularBonificacion(string clima)
         {
             return clima == "Soleado" ? 3 : 0;

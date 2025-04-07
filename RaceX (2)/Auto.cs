@@ -17,8 +17,10 @@ namespace RaceX__2_
         public virtual int Avanzar(string clima)
         {
             Random rnd = new Random();
+
             int avanceBase = rnd.Next(5, 16); // 5 a 15
             int bonificacion = CalcularBonificacion(clima);
+
             return avanceBase + bonificacion;
         }
     }
