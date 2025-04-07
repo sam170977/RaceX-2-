@@ -30,26 +30,27 @@
         {
             this.txtNombreAuto = new System.Windows.Forms.TextBox();
             this.cmbTipoAuto = new System.Windows.Forms.ComboBox();
-            this.btnAgregarAuto = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvVehiculos = new System.Windows.Forms.DataGridView();
             this.cmbClima = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnIniciarCarrera = new System.Windows.Forms.Button();
-            this.btnSiguienteTurno = new System.Windows.Forms.Button();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.lblGanador = new System.Windows.Forms.Label();
+            this.btnAgregarAuto = new System.Windows.Forms.Button();
+            this.btnIniciarCarrera = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombreAuto
             // 
             this.txtNombreAuto.Location = new System.Drawing.Point(116, 24);
-            this.txtNombreAuto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtNombreAuto.Margin = new System.Windows.Forms.Padding(2);
             this.txtNombreAuto.Name = "txtNombreAuto";
             this.txtNombreAuto.Size = new System.Drawing.Size(92, 20);
             this.txtNombreAuto.TabIndex = 0;
+            this.txtNombreAuto.TextChanged += new System.EventHandler(this.txtNombreAuto_TextChanged);
             // 
             // cmbTipoAuto
             // 
@@ -59,21 +60,11 @@
             "Todoterreno",
             "Híbrido"});
             this.cmbTipoAuto.Location = new System.Drawing.Point(116, 50);
-            this.cmbTipoAuto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbTipoAuto.Margin = new System.Windows.Forms.Padding(2);
             this.cmbTipoAuto.Name = "cmbTipoAuto";
             this.cmbTipoAuto.Size = new System.Drawing.Size(92, 21);
             this.cmbTipoAuto.TabIndex = 1;
-            // 
-            // btnAgregarAuto
-            // 
-            this.btnAgregarAuto.Location = new System.Drawing.Point(27, 131);
-            this.btnAgregarAuto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnAgregarAuto.Name = "btnAgregarAuto";
-            this.btnAgregarAuto.Size = new System.Drawing.Size(115, 39);
-            this.btnAgregarAuto.TabIndex = 2;
-            this.btnAgregarAuto.Text = "Agregar Vehículo";
-            this.btnAgregarAuto.UseVisualStyleBackColor = true;
-            this.btnAgregarAuto.Click += new System.EventHandler(this.btnAgregarAuto_Click);
+            this.cmbTipoAuto.SelectedIndexChanged += new System.EventHandler(this.cmbTipoAuto_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -99,7 +90,7 @@
             // 
             this.dgvVehiculos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVehiculos.Location = new System.Drawing.Point(248, 24);
-            this.dgvVehiculos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvVehiculos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvVehiculos.Name = "dgvVehiculos";
             this.dgvVehiculos.RowHeadersWidth = 51;
             this.dgvVehiculos.RowTemplate.Height = 24;
@@ -114,10 +105,11 @@
             "Lluvioso",
             "Ventoso"});
             this.cmbClima.Location = new System.Drawing.Point(116, 78);
-            this.cmbClima.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbClima.Margin = new System.Windows.Forms.Padding(2);
             this.cmbClima.Name = "cmbClima";
             this.cmbClima.Size = new System.Drawing.Size(92, 21);
             this.cmbClima.TabIndex = 6;
+            this.cmbClima.SelectedIndexChanged += new System.EventHandler(this.cmbClima_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -128,28 +120,6 @@
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Clima";
-            // 
-            // btnIniciarCarrera
-            // 
-            this.btnIniciarCarrera.Location = new System.Drawing.Point(27, 185);
-            this.btnIniciarCarrera.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnIniciarCarrera.Name = "btnIniciarCarrera";
-            this.btnIniciarCarrera.Size = new System.Drawing.Size(115, 31);
-            this.btnIniciarCarrera.TabIndex = 8;
-            this.btnIniciarCarrera.Text = "Iniciar Carrera";
-            this.btnIniciarCarrera.UseVisualStyleBackColor = true;
-            this.btnIniciarCarrera.Click += new System.EventHandler(this.btnIniciarCarrera_Click);
-            // 
-            // btnSiguienteTurno
-            // 
-            this.btnSiguienteTurno.Location = new System.Drawing.Point(27, 226);
-            this.btnSiguienteTurno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSiguienteTurno.Name = "btnSiguienteTurno";
-            this.btnSiguienteTurno.Size = new System.Drawing.Size(115, 35);
-            this.btnSiguienteTurno.TabIndex = 9;
-            this.btnSiguienteTurno.Text = "Siguiente Turno";
-            this.btnSiguienteTurno.UseVisualStyleBackColor = true;
-            this.btnSiguienteTurno.Click += new System.EventHandler(this.btnSiguienteTurno_Click);
             // 
             // lblMensaje
             // 
@@ -171,24 +141,52 @@
             this.lblGanador.TabIndex = 12;
             this.lblGanador.Text = "Ganador aquí";
             // 
+            // btnAgregarAuto
+            // 
+            this.btnAgregarAuto.Location = new System.Drawing.Point(40, 130);
+            this.btnAgregarAuto.Name = "btnAgregarAuto";
+            this.btnAgregarAuto.Size = new System.Drawing.Size(121, 36);
+            this.btnAgregarAuto.TabIndex = 13;
+            this.btnAgregarAuto.Text = "AGREGAR AUTO";
+            this.btnAgregarAuto.UseVisualStyleBackColor = true;
+            this.btnAgregarAuto.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnIniciarCarrera
+            // 
+            this.btnIniciarCarrera.Location = new System.Drawing.Point(40, 172);
+            this.btnIniciarCarrera.Name = "btnIniciarCarrera";
+            this.btnIniciarCarrera.Size = new System.Drawing.Size(121, 36);
+            this.btnIniciarCarrera.TabIndex = 14;
+            this.btnIniciarCarrera.Text = "INICIAR CARRERA";
+            this.btnIniciarCarrera.UseVisualStyleBackColor = true;
+            // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Location = new System.Drawing.Point(40, 215);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(121, 36);
+            this.btnSiguiente.TabIndex = 14;
+            this.btnSiguiente.Text = "SIGUIENTE";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 281);
+            this.Controls.Add(this.btnSiguiente);
+            this.Controls.Add(this.btnIniciarCarrera);
+            this.Controls.Add(this.btnAgregarAuto);
             this.Controls.Add(this.lblGanador);
             this.Controls.Add(this.lblMensaje);
-            this.Controls.Add(this.btnSiguienteTurno);
-            this.Controls.Add(this.btnIniciarCarrera);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbClima);
             this.Controls.Add(this.dgvVehiculos);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAgregarAuto);
             this.Controls.Add(this.cmbTipoAuto);
             this.Controls.Add(this.txtNombreAuto);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -202,16 +200,16 @@
 
         private System.Windows.Forms.TextBox txtNombreAuto;
         private System.Windows.Forms.ComboBox cmbTipoAuto;
-        private System.Windows.Forms.Button btnAgregarAuto;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvVehiculos;
         private System.Windows.Forms.ComboBox cmbClima;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnIniciarCarrera;
-        private System.Windows.Forms.Button btnSiguienteTurno;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Label lblGanador;
+        private System.Windows.Forms.Button btnAgregarAuto;
+        private System.Windows.Forms.Button btnIniciarCarrera;
+        private System.Windows.Forms.Button btnSiguiente;
     }
 }
 

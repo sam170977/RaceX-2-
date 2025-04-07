@@ -13,6 +13,9 @@ namespace RaceX__2_
     public partial class Form1 : Form
     {
         private Carrera carrera;
+        public string NombreAuto { get; set; } = string.Empty;
+        public string TipoAuto { get; set; } = string.Empty;
+        public string Clima { get; set; }
 
         public Form1()
         {
@@ -29,96 +32,136 @@ namespace RaceX__2_
             dgvVehiculos.Columns.Add("Distancia", "Distancia Recorrida (m)");
         }
 
-        private void btnAgregarAuto_Click(object sender, EventArgs e)
+        private void txtNombreAuto_TextChanged(object sender, EventArgs e)
         {
-            string nombre = txtNombreAuto.Text.Trim();
-            string tipo = cmbTipoAuto.SelectedItem?.ToString();
+            NombreAuto = txtNombreAuto.Text.Trim();
 
-            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(tipo))
+            if (string.IsNullOrEmpty(NombreAuto))
             {
-                MessageBox.Show("Por favor ingresa un nombre y selecciona un tipo de auto.");
+                MessageBox.Show("Por favor ingresa un nombre para el auto.");
                 return;
-            }
-
-            Auto nuevo = AutoFactory.CrearAuto(tipo, nombre);
-
-            ValidarParticipantes(carrera, nuevo);
-
-            if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
-            {
-                MessageBox.Show("Ya existe un auto con ese nombre.");
-                return;
-            }
-
-            carrera.AgregarAuto(nuevo);
-
-            dgvVehiculos.Rows.Add(nombre, tipo, "0");
-
-            txtNombreAuto.Clear();
-            cmbTipoAuto.SelectedIndex = -1;
-
-            MessageBox.Show($"Auto '{nombre}' agregado correctamente.");
-        }
-
-        private void btnIniciarCarrera_Click(object sender, EventArgs e)
-        {
-            string clima = cmbClima.SelectedItem?.ToString();
-
-            if (carrera.Autos.Count < 3)
-            {
-                MessageBox.Show("Agrega al menos tres autos antes de iniciar la carrera.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(clima))
-            {
-                MessageBox.Show("Selecciona el clima de la carrera.");
-                return;
-            }
-
-            carrera.Clima = clima;
-            carrera.Reiniciar();
-
-            foreach (DataGridViewRow row in dgvVehiculos.Rows)
-            {
-                row.Cells[2].Value = "0";
-            }
-
-            MessageBox.Show("¡La carrera ha comenzado!");
-        }
-
-        private void btnSiguienteTurno_Click(object sender, EventArgs e)
-        {
-            if (carrera.CarreraTerminada)
-            {
-                MessageBox.Show("La carrera ya terminó.");
-                return;
-            }
-
-            string resultado = carrera.SiguienteTurno();
-
-            for (int i = 0; i < carrera.Autos.Count; i++)
-            {
-                dgvVehiculos.Rows[i].Cells[2].Value = carrera.Autos[i].DistanciaRecorrida.ToString();
-            }
-
-            MessageBox.Show(resultado);
-            lblMensaje.Text = carrera.SiguienteTurno();
-
-            if (carrera.CarreraTerminada && carrera.Ganador != null)
-            {
-                lblGanador.Text = $"Ganador: {carrera.Ganador.Nombre}";
             }
         }
 
-        private void ValidarParticipantes(Carrera carrera, Auto nuevo)
+        private void cmbTipoAuto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
+            TipoAuto = cmbTipoAuto.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(TipoAuto))
             {
-                MessageBox.Show("Ya existe un auto con ese nombre.");
+                MessageBox.Show("Por favor selecciona un tipo de auto.");
                 return;
             }
         }
+
+        private void cmbClima_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Clima = cmbClima.SelectedItem?.ToString();
+
+            if (string.IsNullOrEmpty(Clima))
+            {
+                MessageBox.Show("Por favor selecciona el clima de la carrera.");
+                return;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        //private void btnAgregarAuto_Click(object sender, EventArgs e)
+        //{
+        //    string nombre = txtNombreAuto.Text.Trim();
+        //    string tipo = cmbTipoAuto.SelectedItem?.ToString();
+
+        //    if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(tipo))
+        //    {
+        //        MessageBox.Show("Por favor ingresa un nombre y selecciona un tipo de auto.");
+        //        return;
+        //    }
+
+        //    Auto nuevo = AutoFactory.CrearAuto(tipo, nombre);
+
+        //    ValidarParticipantes(carrera, nuevo);
+
+        //    if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
+        //    {
+        //        MessageBox.Show("Ya existe un auto con ese nombre.");
+        //        return;
+        //    }
+
+        //    carrera.AgregarAuto(nuevo);
+
+        //    dgvVehiculos.Rows.Add(nombre, tipo, "0");
+
+        //    txtNombreAuto.Clear();
+        //    cmbTipoAuto.SelectedIndex = -1;
+
+        //    MessageBox.Show($"Auto '{nombre}' agregado correctamente.");
+        //}
+
+        //private void btnIniciarCarrera_Click(object sender, EventArgs e)
+        //{
+        //    string clima = cmbClima.SelectedItem?.ToString();
+
+        //    if (carrera.Autos.Count < 3)
+        //    {
+        //        MessageBox.Show("Agrega al menos tres autos antes de iniciar la carrera.");
+        //        return;
+        //    }
+
+        //    if (string.IsNullOrEmpty(clima))
+        //    {
+        //        MessageBox.Show("Selecciona el clima de la carrera.");
+        //        return;
+        //    }
+
+        //    carrera.Clima = clima;
+        //    carrera.Reiniciar();
+
+        //    foreach (DataGridViewRow row in dgvVehiculos.Rows)
+        //    {
+        //        row.Cells[2].Value = "0";
+        //    }
+
+        //    MessageBox.Show("¡La carrera ha comenzado!");
+        //}
+
+        //private void btnSiguienteTurno_Click(object sender, EventArgs e)
+        //{
+        //    if (carrera.CarreraTerminada)
+        //    {
+        //        MessageBox.Show("La carrera ya terminó.");
+        //        return;
+        //    }
+
+        //    string resultado = carrera.SiguienteTurno();
+
+        //    for (int i = 0; i < carrera.Autos.Count; i++)
+        //    {
+        //        dgvVehiculos.Rows[i].Cells[2].Value = carrera.Autos[i].DistanciaRecorrida.ToString();
+        //    }
+
+        //    MessageBox.Show(resultado);
+        //    lblMensaje.Text = carrera.SiguienteTurno();
+
+        //    if (carrera.CarreraTerminada && carrera.Ganador != null)
+        //    {
+        //        lblGanador.Text = $"Ganador: {carrera.Ganador.Nombre}";
+        //    }
+        //}
+
+        //private void ValidarParticipantes(Carrera carrera, Auto nuevo)
+        //{
+        //    if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
+        //    {
+        //        MessageBox.Show("Ya existe un auto con ese nombre.");
+        //        return;
+        //    }
+        //}
     }
 }
 
