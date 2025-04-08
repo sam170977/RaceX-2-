@@ -14,9 +14,9 @@ namespace RaceX__2_
     {
         private Carrera carrera;
         private List<Auto> autos = new List<Auto>();
-        public string NombreAuto { get; set; } = string.Empty;
-        public string TipoAuto { get; set; } = string.Empty;
-        public string ClimaCarrera { get; set; }
+        private string nombreAuto = string.Empty;
+        private string tipoAuto = string.Empty;
+        private string climaCarrera;
 
         public Form1()
         {
@@ -41,12 +41,12 @@ namespace RaceX__2_
 
         private void txtNombreAuto_TextChanged(object sender, EventArgs e)
         {
-            NombreAuto = txtNombreAuto.Text.Trim();
+            nombreAuto = txtNombreAuto.Text.Trim();
         }
 
         private void cmbTipoAuto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TipoAuto = cmbTipoAuto.SelectedItem?.ToString();
+            tipoAuto = cmbTipoAuto.SelectedItem?.ToString();
         }
 
         private void rbSeleccionarClima_Changed(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace RaceX__2_
 
             if (radioButton != null && radioButton.Checked)
             {
-                ClimaCarrera = radioButton.Text;
+                climaCarrera = radioButton.Text;
             }
         }
 
@@ -67,13 +67,13 @@ namespace RaceX__2_
                 if (!CamposValidos())
                     return;
 
-                Auto nuevoAuto = AutoFactory.CrearAuto(TipoAuto, NombreAuto);
+                Auto nuevoAuto = AutoFactory.CrearAuto(tipoAuto, nombreAuto);
 
                 if (AutoExistente(nuevoAuto))
                     return;
 
                 autos.Add(nuevoAuto);
-                dgvVehiculos.Rows.Add(NombreAuto, TipoAuto, "0");
+                dgvVehiculos.Rows.Add(nombreAuto, tipoAuto, "0");
                 txtNombreAuto.Clear();
                 cmbTipoAuto.SelectedIndex = -1;
 
@@ -92,7 +92,7 @@ namespace RaceX__2_
         {
             try
             {
-                if (string.IsNullOrEmpty(ClimaCarrera))
+                if (string.IsNullOrEmpty(climaCarrera))
                 {
                     MessageBox.Show("Por favor selecciona el clima de la carrera.");
                     return;
@@ -106,7 +106,7 @@ namespace RaceX__2_
 
                 carrera = new Carrera()
                 {
-                    Clima = ClimaCarrera,
+                    Clima = climaCarrera,
                     Autos = autos,
                 };
 
@@ -131,14 +131,22 @@ namespace RaceX__2_
 
         private void btnSiguienteTurno_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                throw new Exception("Error al avanzar el turno.", ex);
+            }
         }
 
         private bool CamposValidos()
         {
             try
             {
-                if (string.IsNullOrEmpty(NombreAuto) || string.IsNullOrEmpty(TipoAuto))
+                if (string.IsNullOrEmpty(nombreAuto) || string.IsNullOrEmpty(tipoAuto))
                 {
                     MessageBox.Show("Por favor ingresa un nombre y selecciona un tipo de auto.");
                     return false;
@@ -174,30 +182,6 @@ namespace RaceX__2_
                 throw new Exception("Error al verificar existencia de auto.", ex);
             }
         }
-
-        //private void btnSiguienteTurno_Click(object sender, EventArgs e)
-        //{
-        //    if (carrera.CarreraTerminada)
-        //    {
-        //        MessageBox.Show("La carrera ya terminó.");
-        //        return;
-        //    }
-
-        //    string resultado = carrera.SiguienteTurno();
-
-        //    for (int i = 0; i < carrera.Autos.Count; i++)
-        //    {
-        //        dgvVehiculos.Rows[i].Cells[2].Value = carrera.Autos[i].DistanciaRecorrida.ToString();
-        //    }
-
-        //    MessageBox.Show(resultado);
-        //    lblMensaje.Text = carrera.SiguienteTurno();
-
-        //    if (carrera.CarreraTerminada && carrera.Ganador != null)
-        //    {
-        //        lblGanador.Text = $"Ganador: {carrera.Ganador.Nombre}";
-        //    }
-        //}
     }
 }
 
