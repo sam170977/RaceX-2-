@@ -175,33 +175,6 @@ namespace RaceX__2_
             }
         }
 
-        //private void btnIniciarCarrera_Click(object sender, EventArgs e)
-        //{
-        //    string clima = cmbClima.SelectedItem?.ToString();
-
-        //    if (carrera.Autos.Count < 3)
-        //    {
-        //        MessageBox.Show("Agrega al menos tres autos antes de iniciar la carrera.");
-        //        return;
-        //    }
-
-        //    if (string.IsNullOrEmpty(clima))
-        //    {
-        //        MessageBox.Show("Selecciona el clima de la carrera.");
-        //        return;
-        //    }
-
-        //    carrera.Clima = clima;
-        //    carrera.Reiniciar();
-
-        //    foreach (DataGridViewRow row in dgvVehiculos.Rows)
-        //    {
-        //        row.Cells[2].Value = "0";
-        //    }
-
-        //    MessageBox.Show("¡La carrera ha comenzado!");
-        //}
-
         //private void btnSiguienteTurno_Click(object sender, EventArgs e)
         //{
         //    if (carrera.CarreraTerminada)
