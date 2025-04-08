@@ -15,20 +15,18 @@ namespace RaceX__2_
 
         private Random rnd = new Random();
 
-        public void AgregarAuto(Auto auto)
-        {
-            Autos.Add(auto);
-        }
-
         public string SiguienteTurno()
         {
             string mensaje = "";
 
+            // Recorre todos los autos y avanza cada uno
             foreach (var auto in Autos)
             {
+                // Verifica si la carrera ha terminado
                 if (CarreraTerminada)
                     break;
 
+                // Avanza el auto
                 int avance = auto.Avanzar(Clima);
 
                 // 30% de probabilidad de obstáculo
@@ -37,29 +35,22 @@ namespace RaceX__2_
                 if (obstaculo)
                 {
                     avance -= 5;
-                    mensaje += $"{auto.Nombre} fue afectado por un obstáculo: avance reducido en 5 metros.\n";
+                    mensaje += $"{auto.Nombre} fue afectado por un obstáculo:\n avance reducido en 5 metros.\n";
                 }
 
                 auto.DistanciaRecorrida += Math.Max(0, avance);
 
+                // Verifica si el auto ha alcanzado la meta
                 if (auto.DistanciaRecorrida >= 150)
                 {
                     CarreraTerminada = true;
                     Ganador = auto; 
-                    mensaje += $"\n🏆 ¡{auto.Nombre} ha ganado la carrera!";
+
+                    mensaje += $"🏆 ¡{auto.Nombre} ha ganado la carrera!";
                 }
             }
 
             return mensaje;
-        }
-
-        public void Reiniciar()
-        {
-            foreach (var auto in Autos)
-                auto.DistanciaRecorrida = 0;
-
-            CarreraTerminada = false;
-            Ganador = null; 
         }
     }
 }

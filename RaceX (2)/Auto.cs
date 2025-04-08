@@ -12,7 +12,7 @@ namespace RaceX__2_
         public string Tipo { get; set; }
         public int DistanciaRecorrida { get; set; } = 0;
 
-        public abstract int CalcularBonificacion(string clima);
+        protected abstract int CalcularBonificacion(string clima);
 
         public virtual int Avanzar(string clima)
         {

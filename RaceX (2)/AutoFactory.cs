@@ -17,19 +17,19 @@ namespace RaceX__2_
                 case "Deportivo":
                     auto = new AutoDeportivo()
                     {
-                        Tipo = "Deportivo"
+                        Tipo = tipo
                     };
                     break;
                 case "Todoterreno":
                     auto = new AutoTodoterreno()
                     {
-                        Tipo = "Todoterreno"
+                        Tipo = tipo
                     };
                     break;
                 case "Híbrido":
                     auto = new AutoHibrido()
                     {
-                        Tipo = "Híbrido"
+                        Tipo = tipo
                     };
                     break;
                 default:
@@ -37,6 +37,7 @@ namespace RaceX__2_
             }
 
             auto.Nombre = nombre;
+
             return auto;
         }
     }
