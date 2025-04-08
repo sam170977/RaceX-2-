@@ -33,14 +33,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvVehiculos = new System.Windows.Forms.DataGridView();
-            this.cmbClima = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.lblMensaje = new System.Windows.Forms.Label();
             this.lblGanador = new System.Windows.Forms.Label();
             this.btnAgregarAuto = new System.Windows.Forms.Button();
             this.btnIniciarCarrera = new System.Windows.Forms.Button();
-            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnSiguienteTurno = new System.Windows.Forms.Button();
+            this.gbClima = new System.Windows.Forms.GroupBox();
+            this.rbVentoso = new System.Windows.Forms.RadioButton();
+            this.rbLluvioso = new System.Windows.Forms.RadioButton();
+            this.rbSoleado = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).BeginInit();
+            this.gbClima.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNombreAuto
@@ -89,7 +92,7 @@
             // dgvVehiculos
             // 
             this.dgvVehiculos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVehiculos.Location = new System.Drawing.Point(248, 24);
+            this.dgvVehiculos.Location = new System.Drawing.Point(378, 24);
             this.dgvVehiculos.Margin = new System.Windows.Forms.Padding(2);
             this.dgvVehiculos.Name = "dgvVehiculos";
             this.dgvVehiculos.RowHeadersWidth = 51;
@@ -97,34 +100,10 @@
             this.dgvVehiculos.Size = new System.Drawing.Size(341, 122);
             this.dgvVehiculos.TabIndex = 5;
             // 
-            // cmbClima
-            // 
-            this.cmbClima.FormattingEnabled = true;
-            this.cmbClima.Items.AddRange(new object[] {
-            "Soleado",
-            "Lluvioso",
-            "Ventoso"});
-            this.cmbClima.Location = new System.Drawing.Point(116, 78);
-            this.cmbClima.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbClima.Name = "cmbClima";
-            this.cmbClima.Size = new System.Drawing.Size(92, 21);
-            this.cmbClima.TabIndex = 6;
-            this.cmbClima.SelectedIndexChanged += new System.EventHandler(this.cmbClima_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 81);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Clima";
-            // 
             // lblMensaje
             // 
             this.lblMensaje.AutoSize = true;
-            this.lblMensaje.Location = new System.Drawing.Point(245, 157);
+            this.lblMensaje.Location = new System.Drawing.Point(375, 153);
             this.lblMensaje.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMensaje.Name = "lblMensaje";
             this.lblMensaje.Size = new System.Drawing.Size(72, 13);
@@ -134,7 +113,7 @@
             // lblGanador
             // 
             this.lblGanador.AutoSize = true;
-            this.lblGanador.Location = new System.Drawing.Point(245, 185);
+            this.lblGanador.Location = new System.Drawing.Point(375, 195);
             this.lblGanador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGanador.Name = "lblGanador";
             this.lblGanador.Size = new System.Drawing.Size(73, 13);
@@ -143,44 +122,93 @@
             // 
             // btnAgregarAuto
             // 
-            this.btnAgregarAuto.Location = new System.Drawing.Point(40, 130);
+            this.btnAgregarAuto.Location = new System.Drawing.Point(27, 141);
             this.btnAgregarAuto.Name = "btnAgregarAuto";
             this.btnAgregarAuto.Size = new System.Drawing.Size(121, 36);
             this.btnAgregarAuto.TabIndex = 13;
             this.btnAgregarAuto.Text = "AGREGAR AUTO";
             this.btnAgregarAuto.UseVisualStyleBackColor = true;
-            this.btnAgregarAuto.Click += new System.EventHandler(this.button1_Click);
+            this.btnAgregarAuto.Click += new System.EventHandler(this.btnAgregarAuto_Click);
             // 
             // btnIniciarCarrera
             // 
-            this.btnIniciarCarrera.Location = new System.Drawing.Point(40, 172);
+            this.btnIniciarCarrera.Location = new System.Drawing.Point(27, 183);
             this.btnIniciarCarrera.Name = "btnIniciarCarrera";
             this.btnIniciarCarrera.Size = new System.Drawing.Size(121, 36);
             this.btnIniciarCarrera.TabIndex = 14;
             this.btnIniciarCarrera.Text = "INICIAR CARRERA";
             this.btnIniciarCarrera.UseVisualStyleBackColor = true;
+            this.btnIniciarCarrera.Click += new System.EventHandler(this.btnIniciarCarrera_Click);
             // 
-            // btnSiguiente
+            // btnSiguienteTurno
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(40, 215);
-            this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(121, 36);
-            this.btnSiguiente.TabIndex = 14;
-            this.btnSiguiente.Text = "SIGUIENTE TURNO";
-            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguienteTurno.Location = new System.Drawing.Point(27, 226);
+            this.btnSiguienteTurno.Name = "btnSiguienteTurno";
+            this.btnSiguienteTurno.Size = new System.Drawing.Size(121, 36);
+            this.btnSiguienteTurno.TabIndex = 14;
+            this.btnSiguienteTurno.Text = "SIGUIENTE TURNO";
+            this.btnSiguienteTurno.UseVisualStyleBackColor = true;
+            this.btnSiguienteTurno.Click += new System.EventHandler(this.btnSiguienteTurno_Click);
+            // 
+            // gbClima
+            // 
+            this.gbClima.Controls.Add(this.rbVentoso);
+            this.gbClima.Controls.Add(this.rbLluvioso);
+            this.gbClima.Controls.Add(this.rbSoleado);
+            this.gbClima.Location = new System.Drawing.Point(27, 76);
+            this.gbClima.Name = "gbClima";
+            this.gbClima.Size = new System.Drawing.Size(311, 48);
+            this.gbClima.TabIndex = 15;
+            this.gbClima.TabStop = false;
+            this.gbClima.Text = "Clima:";
+            // 
+            // rbVentoso
+            // 
+            this.rbVentoso.AutoSize = true;
+            this.rbVentoso.Location = new System.Drawing.Point(195, 19);
+            this.rbVentoso.Name = "rbVentoso";
+            this.rbVentoso.Size = new System.Drawing.Size(64, 17);
+            this.rbVentoso.TabIndex = 2;
+            this.rbVentoso.TabStop = true;
+            this.rbVentoso.Text = "Ventoso";
+            this.rbVentoso.UseVisualStyleBackColor = true;
+            this.rbVentoso.CheckedChanged += new System.EventHandler(this.rbSeleccionarClima_Changed);
+            // 
+            // rbLluvioso
+            // 
+            this.rbLluvioso.AutoSize = true;
+            this.rbLluvioso.Location = new System.Drawing.Point(104, 19);
+            this.rbLluvioso.Name = "rbLluvioso";
+            this.rbLluvioso.Size = new System.Drawing.Size(64, 17);
+            this.rbLluvioso.TabIndex = 1;
+            this.rbLluvioso.TabStop = true;
+            this.rbLluvioso.Text = "Lluvioso";
+            this.rbLluvioso.UseVisualStyleBackColor = true;
+            this.rbLluvioso.CheckedChanged += new System.EventHandler(this.rbSeleccionarClima_Changed);
+            // 
+            // rbSoleado
+            // 
+            this.rbSoleado.AutoSize = true;
+            this.rbSoleado.Location = new System.Drawing.Point(13, 19);
+            this.rbSoleado.Name = "rbSoleado";
+            this.rbSoleado.Size = new System.Drawing.Size(64, 17);
+            this.rbSoleado.TabIndex = 0;
+            this.rbSoleado.TabStop = true;
+            this.rbSoleado.Text = "Soleado";
+            this.rbSoleado.UseVisualStyleBackColor = true;
+            this.rbSoleado.CheckedChanged += new System.EventHandler(this.rbSeleccionarClima_Changed);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 281);
-            this.Controls.Add(this.btnSiguiente);
+            this.ClientSize = new System.Drawing.Size(730, 281);
+            this.Controls.Add(this.gbClima);
+            this.Controls.Add(this.btnSiguienteTurno);
             this.Controls.Add(this.btnIniciarCarrera);
             this.Controls.Add(this.btnAgregarAuto);
             this.Controls.Add(this.lblGanador);
             this.Controls.Add(this.lblMensaje);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cmbClima);
             this.Controls.Add(this.dgvVehiculos);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -191,6 +219,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).EndInit();
+            this.gbClima.ResumeLayout(false);
+            this.gbClima.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,13 +233,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvVehiculos;
-        private System.Windows.Forms.ComboBox cmbClima;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblMensaje;
         private System.Windows.Forms.Label lblGanador;
         private System.Windows.Forms.Button btnAgregarAuto;
         private System.Windows.Forms.Button btnIniciarCarrera;
-        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnSiguienteTurno;
+        private System.Windows.Forms.GroupBox gbClima;
+        private System.Windows.Forms.RadioButton rbVentoso;
+        private System.Windows.Forms.RadioButton rbLluvioso;
+        private System.Windows.Forms.RadioButton rbSoleado;
     }
 }
 

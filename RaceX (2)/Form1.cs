@@ -13,9 +13,10 @@ namespace RaceX__2_
     public partial class Form1 : Form
     {
         private Carrera carrera;
+        private List<Auto> autos = new List<Auto>();
         public string NombreAuto { get; set; } = string.Empty;
         public string TipoAuto { get; set; } = string.Empty;
-        public string Clima { get; set; }
+        public string ClimaCarrera { get; set; }
 
         public Form1()
         {
@@ -30,78 +31,149 @@ namespace RaceX__2_
             dgvVehiculos.Columns.Add("Nombre", "Nombre");
             dgvVehiculos.Columns.Add("Tipo", "Tipo");
             dgvVehiculos.Columns.Add("Distancia", "Distancia Recorrida (m)");
+
+            if (carrera == null)
+                btnSiguienteTurno.Enabled = false;
+
+            if (autos.Count < 3)
+                btnIniciarCarrera.Enabled = false;
         }
 
         private void txtNombreAuto_TextChanged(object sender, EventArgs e)
         {
             NombreAuto = txtNombreAuto.Text.Trim();
-
-            if (string.IsNullOrEmpty(NombreAuto))
-            {
-                MessageBox.Show("Por favor ingresa un nombre para el auto.");
-                return;
-            }
         }
 
         private void cmbTipoAuto_SelectedIndexChanged(object sender, EventArgs e)
         {
             TipoAuto = cmbTipoAuto.SelectedItem?.ToString();
+        }
 
-            if (string.IsNullOrEmpty(TipoAuto))
+        private void rbSeleccionarClima_Changed(object sender, EventArgs e)
+        {
+            // Verifica cuál RadioButton activó el evento
+            RadioButton radioButton = sender as RadioButton;
+
+            if (radioButton != null && radioButton.Checked)
             {
-                MessageBox.Show("Por favor selecciona un tipo de auto.");
+                ClimaCarrera = radioButton.Text;
+            }
+        }
+
+        private void btnAgregarAuto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!CamposValidos())
+                    return;
+
+                Auto nuevoAuto = AutoFactory.CrearAuto(TipoAuto, NombreAuto);
+
+                if (AutoExistente(nuevoAuto))
+                    return;
+
+                autos.Add(nuevoAuto);
+                dgvVehiculos.Rows.Add(NombreAuto, TipoAuto, "0");
+                txtNombreAuto.Clear();
+                cmbTipoAuto.SelectedIndex = -1;
+
+                if (autos.Count >= 3)
+                    btnIniciarCarrera.Enabled = true;
+
+                MessageBox.Show($"Auto '{nuevoAuto.Nombre}' agregado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+        }
+
+        private void btnIniciarCarrera_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(ClimaCarrera))
+                {
+                    MessageBox.Show("Por favor selecciona el clima de la carrera.");
+                    return;
+                }
+
+                if (autos.Count < 3)
+                {
+                    MessageBox.Show("Agrega al menos tres autos antes de iniciar la carrera.");
+                    return;
+                }
+
+                carrera = new Carrera()
+                {
+                    Clima = ClimaCarrera,
+                    Autos = autos,
+                };
+
+                carrera.Reiniciar();
+
+                foreach (DataGridViewRow row in dgvVehiculos.Rows)
+                {
+                    row.Cells[2].Value = "0";
+                }
+
+                if (carrera != null)
+                    btnSiguienteTurno.Enabled = true;
+
+                MessageBox.Show("¡La carrera ha comenzado!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al iniciar la carrera: {ex.Message}");
                 return;
             }
         }
 
-        private void cmbClima_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnSiguienteTurno_Click(object sender, EventArgs e)
         {
-            Clima = cmbClima.SelectedItem?.ToString();
+            
+        }
 
-            if (string.IsNullOrEmpty(Clima))
+        private bool CamposValidos()
+        {
+            try
             {
-                MessageBox.Show("Por favor selecciona el clima de la carrera.");
-                return;
+                if (string.IsNullOrEmpty(NombreAuto) || string.IsNullOrEmpty(TipoAuto))
+                {
+                    MessageBox.Show("Por favor ingresa un nombre y selecciona un tipo de auto.");
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                throw new Exception("Error al validar campos.", ex);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private bool AutoExistente(Auto nuevoAuto)
         {
+            try
+            {
+                foreach (var auto in autos)
+                {
+                    if (auto.Nombre.Equals(nuevoAuto.Nombre, StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Ya existe un auto con ese nombre.");
+                        return true;
+                    }
+                }
 
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+                throw new Exception("Error al verificar existencia de auto.", ex);
+            }
         }
-
-
-
-        //private void btnAgregarAuto_Click(object sender, EventArgs e)
-        //{
-        //    string nombre = txtNombreAuto.Text.Trim();
-        //    string tipo = cmbTipoAuto.SelectedItem?.ToString();
-
-        //    if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(tipo))
-        //    {
-        //        MessageBox.Show("Por favor ingresa un nombre y selecciona un tipo de auto.");
-        //        return;
-        //    }
-
-        //    Auto nuevo = AutoFactory.CrearAuto(tipo, nombre);
-
-        //    ValidarParticipantes(carrera, nuevo);
-
-        //    if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
-        //    {
-        //        MessageBox.Show("Ya existe un auto con ese nombre.");
-        //        return;
-        //    }
-
-        //    carrera.AgregarAuto(nuevo);
-
-        //    dgvVehiculos.Rows.Add(nombre, tipo, "0");
-
-        //    txtNombreAuto.Clear();
-        //    cmbTipoAuto.SelectedIndex = -1;
-
-        //    MessageBox.Show($"Auto '{nombre}' agregado correctamente.");
-        //}
 
         //private void btnIniciarCarrera_Click(object sender, EventArgs e)
         //{
@@ -151,15 +223,6 @@ namespace RaceX__2_
         //    if (carrera.CarreraTerminada && carrera.Ganador != null)
         //    {
         //        lblGanador.Text = $"Ganador: {carrera.Ganador.Nombre}";
-        //    }
-        //}
-
-        //private void ValidarParticipantes(Carrera carrera, Auto nuevo)
-        //{
-        //    if (carrera.Autos.Any(a => a.Nombre.Equals(nuevo.Nombre, StringComparison.OrdinalIgnoreCase)))
-        //    {
-        //        MessageBox.Show("Ya existe un auto con ese nombre.");
-        //        return;
         //    }
         //}
     }

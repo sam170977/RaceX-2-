@@ -15,11 +15,6 @@ namespace RaceX__2_
 
         private Random rnd = new Random();
 
-        public void AgregarAuto(Auto auto)
-        {
-            Autos.Add(auto);
-        }
-
         public string SiguienteTurno()
         {
             string mensaje = "";

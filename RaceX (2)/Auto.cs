@@ -13,15 +13,16 @@ namespace RaceX__2_
         public int DistanciaRecorrida { get; set; } = 0;
 
         public abstract int CalcularBonificacion(string clima);
+        public abstract int Avanzar(string clima);
 
-        public virtual int Avanzar(string clima)
-        {
-            Random rnd = new Random();
+        //public virtual int Avanzar(string clima)
+        //{
+        //    Random rnd = new Random();
 
-            int avanceBase = rnd.Next(5, 16); // 5 a 15
-            int bonificacion = CalcularBonificacion(clima);
+        //    int avanceBase = rnd.Next(5, 16); // 5 a 15
+        //    int bonificacion = CalcularBonificacion(clima);
 
-            return avanceBase + bonificacion;
-        }
+        //    return avanceBase + bonificacion;
+        //}
     }
 }
