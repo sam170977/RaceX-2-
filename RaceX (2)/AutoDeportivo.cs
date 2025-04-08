@@ -16,7 +16,7 @@ namespace RaceX__2_
             return avanceBase + bonificacion;
         }
 
-        public override int CalcularBonificacion(string clima)
+        protected override int CalcularBonificacion(string clima)
         {
             return clima == "Soleado" ? 3 : 0;
         }

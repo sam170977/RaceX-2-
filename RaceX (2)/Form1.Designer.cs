@@ -33,8 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvVehiculos = new System.Windows.Forms.DataGridView();
-            this.lblMensaje = new System.Windows.Forms.Label();
-            this.lblGanador = new System.Windows.Forms.Label();
+            this.lblNovedad = new System.Windows.Forms.Label();
             this.btnAgregarAuto = new System.Windows.Forms.Button();
             this.btnIniciarCarrera = new System.Windows.Forms.Button();
             this.btnSiguienteTurno = new System.Windows.Forms.Button();
@@ -42,6 +41,8 @@
             this.rbVentoso = new System.Windows.Forms.RadioButton();
             this.rbLluvioso = new System.Windows.Forms.RadioButton();
             this.rbSoleado = new System.Windows.Forms.RadioButton();
+            this.lblMensaje = new System.Windows.Forms.Label();
+            this.btnReiniciarTodo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculos)).BeginInit();
             this.gbClima.SuspendLayout();
             this.SuspendLayout();
@@ -100,25 +101,14 @@
             this.dgvVehiculos.Size = new System.Drawing.Size(341, 122);
             this.dgvVehiculos.TabIndex = 5;
             // 
-            // lblMensaje
+            // lblNovedad
             // 
-            this.lblMensaje.AutoSize = true;
-            this.lblMensaje.Location = new System.Drawing.Point(375, 153);
-            this.lblMensaje.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMensaje.Name = "lblMensaje";
-            this.lblMensaje.Size = new System.Drawing.Size(72, 13);
-            this.lblMensaje.TabIndex = 11;
-            this.lblMensaje.Text = "Mensaje aquí";
-            // 
-            // lblGanador
-            // 
-            this.lblGanador.AutoSize = true;
-            this.lblGanador.Location = new System.Drawing.Point(375, 195);
-            this.lblGanador.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblGanador.Name = "lblGanador";
-            this.lblGanador.Size = new System.Drawing.Size(73, 13);
-            this.lblGanador.TabIndex = 12;
-            this.lblGanador.Text = "Ganador aquí";
+            this.lblNovedad.AutoSize = true;
+            this.lblNovedad.Location = new System.Drawing.Point(444, 164);
+            this.lblNovedad.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNovedad.Name = "lblNovedad";
+            this.lblNovedad.Size = new System.Drawing.Size(0, 13);
+            this.lblNovedad.TabIndex = 11;
             // 
             // btnAgregarAuto
             // 
@@ -198,17 +188,38 @@
             this.rbSoleado.UseVisualStyleBackColor = true;
             this.rbSoleado.CheckedChanged += new System.EventHandler(this.rbSeleccionarClima_Changed);
             // 
+            // lblMensaje
+            // 
+            this.lblMensaje.AutoSize = true;
+            this.lblMensaje.Location = new System.Drawing.Point(375, 164);
+            this.lblMensaje.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMensaje.Name = "lblMensaje";
+            this.lblMensaje.Size = new System.Drawing.Size(50, 13);
+            this.lblMensaje.TabIndex = 16;
+            this.lblMensaje.Text = "Mensaje:";
+            // 
+            // btnReiniciarTodo
+            // 
+            this.btnReiniciarTodo.Location = new System.Drawing.Point(590, 226);
+            this.btnReiniciarTodo.Name = "btnReiniciarTodo";
+            this.btnReiniciarTodo.Size = new System.Drawing.Size(128, 43);
+            this.btnReiniciarTodo.TabIndex = 17;
+            this.btnReiniciarTodo.Text = "REINICIAR TODO";
+            this.btnReiniciarTodo.UseVisualStyleBackColor = true;
+            this.btnReiniciarTodo.Click += new System.EventHandler(this.btnReiniciarTodo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(730, 281);
+            this.Controls.Add(this.btnReiniciarTodo);
+            this.Controls.Add(this.lblMensaje);
             this.Controls.Add(this.gbClima);
             this.Controls.Add(this.btnSiguienteTurno);
             this.Controls.Add(this.btnIniciarCarrera);
             this.Controls.Add(this.btnAgregarAuto);
-            this.Controls.Add(this.lblGanador);
-            this.Controls.Add(this.lblMensaje);
+            this.Controls.Add(this.lblNovedad);
             this.Controls.Add(this.dgvVehiculos);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -233,8 +244,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvVehiculos;
-        private System.Windows.Forms.Label lblMensaje;
-        private System.Windows.Forms.Label lblGanador;
+        private System.Windows.Forms.Label lblNovedad;
         private System.Windows.Forms.Button btnAgregarAuto;
         private System.Windows.Forms.Button btnIniciarCarrera;
         private System.Windows.Forms.Button btnSiguienteTurno;
@@ -242,6 +252,8 @@
         private System.Windows.Forms.RadioButton rbVentoso;
         private System.Windows.Forms.RadioButton rbLluvioso;
         private System.Windows.Forms.RadioButton rbSoleado;
+        private System.Windows.Forms.Label lblMensaje;
+        private System.Windows.Forms.Button btnReiniciarTodo;
     }
 }
 
